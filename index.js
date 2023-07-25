@@ -1,7 +1,7 @@
 const express = require("express");
 const app = express();
 
-app.use(express.json())
+app.use(express.json());
 
 let persons = [
   {
@@ -55,10 +55,21 @@ function generateId() {
 
 app.post("/api/persons", (request, response) => {
   const body = request.body;
+  const uniqueName = persons.find((person) => {
+    return person.name === body.name;
+  });
 
   if (!body.name) {
     return response.status(400).json({
       error: "name missing",
+    });
+  } else if (!body.number) {
+    return response.status(400).json({
+      error: "number missing",
+    });
+  } else if (uniqueName) {
+    return response.status(400).json({
+      error: "name must be unique",
     });
   }
 
