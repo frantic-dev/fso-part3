@@ -29,8 +29,29 @@ app.get("/api/persons", (request, response) => {
 });
 
 app.get("/info", (request, response) => {
-  response.send(`<p>phonebook has info for ${persons.length} people</p> <p>${new Date()} (${Intl.DateTimeFormat().resolvedOptions().timeZone})</p>
+  response.send(`<p>phonebook has info for ${
+    persons.length
+  } people</p> <p>${new Date()} (${
+    Intl.DateTimeFormat().resolvedOptions().timeZone
+  })</p>
   `);
+});
+
+app.get("/api/persons/:id", (request, response) => {
+  const id = request.params.id;
+  const person = persons.find((person) => person.id === +id);
+  if (person) {
+    response.json(person);
+  } else {
+    response.status(404).send("<p>person does not exist</p>");
+  }
+});
+
+app.delete("/api/persons/:id", (request, response) => {
+  const id = request.params.id;
+  persons = persons.filter((person) => person.id !== +id);
+
+  response.status(204).end();
 });
 
 const PORT = 3001;
