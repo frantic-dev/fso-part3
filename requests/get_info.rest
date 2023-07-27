@@ -1,1 +1,1 @@
-GET  http://localhost:3001/info
+GET  https://ex3-10-fullstackopen.onrender.com/info
