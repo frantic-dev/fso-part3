@@ -13,18 +13,37 @@ mongoose
 const personSchema = new mongoose.Schema({
   name: {
     type: String,
-    minLength: 3, 
+    minLength: 3,
     required: true,
   },
-  number: String
-})
+  number: {
+    type: String,
+    minLength: 8,
+    validate: {
+      validator: function (value) {
+        console.log(value);
+        const numberParts = value.toString().split("-");
+        const reg = new RegExp("[^0-9-]", "g").test(value);
+        console.log(numberParts);
+
+        return (
+          numberParts.length === 2 &&
+          (numberParts[0].length === 2 || numberParts[0].length === 1) &&
+          !reg
+        );
+      },
+      message:
+        'number must have length of 8 or more, formatted by two parts separated by a "-" , first part including only 2 or three numbers',
+    },
+  },
+});
 
 personSchema.set("toJSON", {
   transform: (document, returnedObject) => {
     returnedObject.id = returnedObject._id.toString();
-    delete returnedObject._id
-    delete returnedObject.__v
-  }
-})
+    delete returnedObject._id;
+    delete returnedObject.__v;
+  },
+});
 
-module.exports = mongoose.model("Person", personSchema)
+module.exports = mongoose.model("Person", personSchema);
