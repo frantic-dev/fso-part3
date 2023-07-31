@@ -6,6 +6,7 @@
   "scripts": {
     "start": "node index.js",
     "dev": "nodemon index.js",
+    "build:ui": "rm -rf dist && cd ../full-stack-open/part_2/phonebook && npm run build && cp -r dist ../../../fso-part3" ,
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
