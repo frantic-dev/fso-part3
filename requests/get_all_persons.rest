@@ -1,1 +1,1 @@
-GET https://ex3-10-fullstackopen.onrender.com/api/persons
+GET http://localhost:3001/api/persons

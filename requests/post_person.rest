@@ -1,7 +1,7 @@
-POST  https://ex3-10-fullstackopen.onrender.com/api/persons
+POST  http://localhost:3001/api/persons
 Content-Type: application/json
 
 {
-  "name": " Cherill Johnson",
-  "number": "25-89-9562"
+  "name": " Stace Harold",
+  "number": "25-56-1112"
 }
